@@ -21,7 +21,7 @@ def posiblesMovimientos(puntosPartida, tablero):
 
 
 def cantidadMovimientos(puntoInicial, puntoFinal, tablero):
-    posActual = [(puntoInicial)]
+    posActual = [puntoInicial]
     cantMov = 0
 
     while not puntoFinal in posActual:
@@ -36,6 +36,7 @@ def crearMatDistancias(puntos, tablero):
 
     for p1 in puntos:
         fila = list()
+
         for p2 in puntos:
             dist = cantidadMovimientos(p1, p2, tablero)
             fila.append(dist)
@@ -90,20 +91,24 @@ def caminoMasCorto(puntos, tablero):
 
 
 def generarCaso():
+    print("")
     tamanoTablero = int(input("Tamaño del tablero: "))
     cantidadCeldas = int(input("Cantidad de celdas especiales: "))
 
     if tamanoTablero < 4 or tamanoTablero > 1000:
-        print("Error, valor debe estar entre 4 y 1000")
+        print("Error, tamaño debe estar entre 4 y 1000")
         return
 
-    if cantidadCeldas < 1 or tamanoTablero > 16:
-        print("Error, valor debe estar entre 1 y 16")
+    if cantidadCeldas < 1 or cantidadCeldas > 16:
+        print("Error, cantidad de celdas debe estar entre 1 y 16")
         return
 
     celdasEspeciales = list()
     for j in range(cantidadCeldas):
-        print(f"Celda especial {j + 1}")
+
+        print("")
+        print(f"Celda especial {j + 1}:")
+        
         x = int(input("Coordenada x: "))
         y = int(input("Coordenada y: "))
 
