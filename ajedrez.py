@@ -19,7 +19,6 @@ def posiblesMovimientos(puntosPartida, tablero):
     return puntosLlegada
 
 
-
 def cantidadMovimientos(puntoInicial, puntoFinal, tablero):
     posActual = [puntoInicial]
     cantMov = 0
@@ -63,7 +62,6 @@ def generarCombinaciones(conjunto: list) -> list:
     return combs
 
 
-
 def caminoMasCorto(puntos, tablero):
     matrizDistancias = crearMatDistancias(puntos, tablero)
     puntosParaCombinar = list(range(len(puntos)))
@@ -75,10 +73,11 @@ def caminoMasCorto(puntos, tablero):
         costo = 0
 
         for i in range(len(c) - 1):
-            j = i + 1
-            costo += matrizDistancias[i][j]
+            p1 = c[i]
+            p2 = c[i + 1]
+            costo += matrizDistancias[p1][p2]
 
-        costo += matrizDistancias[len(c) - 1][0]
+        costo += matrizDistancias[c[-1]][c[0]]
         posiblesCostos.append(costo)
 
     minimo = posiblesCostos[0]
