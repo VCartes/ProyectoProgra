@@ -5,6 +5,13 @@ def esPosicionValida(x, y, tablero):
 
 
 def posiblesMovimientos(puntosPartida, tablero):
+
+    """
+    Funcion que toma una lista de puntos de partida y entrega una lista
+    de todos los puntos a los cuales se puede llegar con un movimiento desde
+    cada uno de los puntos de partida
+    """
+
     movimientos = [(-1, 2), (1, 2), (2, 1), (2, -1), (1, -2), (-1, -2), (-2, -1), (-2, 1)]
     puntosLlegada = list()
 
@@ -20,11 +27,11 @@ def posiblesMovimientos(puntosPartida, tablero):
 
 
 def cantidadMovimientos(puntoInicial, puntoFinal, tablero):
-    posActual = [puntoInicial]
+    posActual = [puntoInicial]                              # Nos damos un punto de partida
     cantMov = 0
 
     while not puntoFinal in posActual:
-        posActual = posiblesMovimientos(posActual, tablero)
+        posActual = posiblesMovimientos(posActual, tablero) # Se actualiza la posicion actual
         cantMov += 1
 
     return cantMov
@@ -33,6 +40,7 @@ def cantidadMovimientos(puntoInicial, puntoFinal, tablero):
 def crearMatDistancias(puntos, tablero):
     matriz = list()
 
+    # Calculamos la distancia entre todo par de puntos
     for p1 in puntos:
         fila = list()
 
@@ -46,6 +54,12 @@ def crearMatDistancias(puntos, tablero):
 
 
 def generarCombinaciones(conjunto: list) -> list:
+
+    """
+    Funcion recursiva que dado un conjunto de puntos genera
+    todas sus posibles combinaciones (permutaciones?)
+    """
+
     combs = list()
 
     if len(conjunto) == 0:
@@ -63,12 +77,13 @@ def generarCombinaciones(conjunto: list) -> list:
 
 
 def caminoMasCorto(puntos, tablero):
-    matrizDistancias = crearMatDistancias(puntos, tablero)
-    puntosParaCombinar = list(range(len(puntos)))
-    combinaciones = generarCombinaciones(puntosParaCombinar)
+    matrizDistancias = crearMatDistancias(puntos, tablero)      # Tabla de distancias
+    puntosParaCombinar = list(range(len(puntos)))               # [0, 1, 2, 3, ... , n]
+    combinaciones = generarCombinaciones(puntosParaCombinar)    # Posibles combinaciones de [0, 1, ... , n]
 
     posiblesCostos = list()
 
+    # Calcular distancias de las posibles combinaciones
     for c in combinaciones:
         costo = 0
 
@@ -80,7 +95,8 @@ def caminoMasCorto(puntos, tablero):
         costo += matrizDistancias[c[-1]][c[0]]
         posiblesCostos.append(costo)
 
-    minimo = posiblesCostos[0]
+    # Encontrar minimo de las distancias
+    minimo = posiblesCostos[0]      # Necesito que minimo valga algo
 
     for costo in posiblesCostos:
         if costo < minimo:
@@ -96,12 +112,13 @@ def generarCaso():
 
     if tamanoTablero < 4 or tamanoTablero > 1000:
         print("Error, tamaño debe estar entre 4 y 1000")
-        return
+        return                          # La ejecucion del caso termina si se ingresan datas erroneos
 
     if cantidadCeldas < 1 or cantidadCeldas > 16:
         print("Error, cantidad de celdas debe estar entre 1 y 16")
-        return
+        return                          # Termina ejecucion
 
+    # Generacion de Celdas Especiales
     celdasEspeciales = list()
     for j in range(cantidadCeldas):
 
@@ -113,17 +130,22 @@ def generarCaso():
 
         if not esPosicionValida(x, y, tamanoTablero):
             print("Error, punto invalido")
-            return
+            return                      # Termina ejecucion
 
-        celdasEspeciales.append((x, y))
+        celdasEspeciales.append((x, y)) # Par ordenado
 
+    print("")
+
+    # Aqui ocurre la magia
     print(caminoMasCorto(celdasEspeciales, tamanoTablero))
 
 
 
+# Pedir Cantidad de Casos y Validar
 cantidadCasos = int(input("Cantidad de casos: "))
 while cantidadCasos < 1 or cantidadCasos > 100:
     cantidadCasos = int(input("Cantidad de casos: "))
 
-for i in range(cantidadCasos):
+# Generar casos
+for _ in range(cantidadCasos):
     generarCaso()
