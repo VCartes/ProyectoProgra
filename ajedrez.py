@@ -110,10 +110,14 @@ def generarCaso():
     tamanoTablero = int(input("Tamaño del tablero: "))
     cantidadCeldas = int(input("Cantidad de celdas especiales: "))
 
-    if tamanoTablero < 4 or tamanoTablero > 1000:
-        print("Error, tamaño debe estar entre 4 y 1000")
+    if tamanoTablero < 4:
+        print("Error, el tablero debe tener un tamaño mínimo de 4 celdas por lado")
         return                          # La ejecucion del caso termina si se ingresan datas erroneos
 
+    if tamanoTablero > 100:
+        print("Error, el tablero debe tener un tamaño máximp de 100 celdas por lado")
+        return                          # Termina ejecucion
+    
     if cantidadCeldas < 1 or cantidadCeldas > 16:
         print("Error, cantidad de celdas debe estar entre 1 y 16")
         return                          # Termina ejecucion
@@ -129,7 +133,7 @@ def generarCaso():
         y = int(input("Coordenada y: "))
 
         if not esPosicionValida(x, y, tamanoTablero):
-            print("Error, punto invalido")
+            print(f"Error, las coordenadas de la celda especial {j + 1} está fuera de rango")
             return                      # Termina ejecucion
 
         celdasEspeciales.append((x, y)) # Par ordenado
@@ -137,7 +141,8 @@ def generarCaso():
     print("")
 
     # Aqui ocurre la magia
-    print(caminoMasCorto(celdasEspeciales, tamanoTablero))
+    movimientos = caminoMasCorto(celdasEspeciales, tamanoTablero)
+    print(f"{movimientos} movimientos")
 
 
 
