@@ -24,7 +24,7 @@ def posiblesMovimientos(puntosPartida, tablero):
                 nuevoPunto = (nuevaX, nuevaY)
 
                 if nuevoPunto not in puntosLlegada:             # Optimizacion para no considerar el mismo punto mas de una vez
-                    puntosLlegada.append((nuevaX, nuevaY))
+                    puntosLlegada.append(nuevoPunto)
 
     return puntosLlegada
 
