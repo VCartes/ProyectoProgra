@@ -21,7 +21,10 @@ def posiblesMovimientos(puntosPartida, tablero):
             nuevaY = punto[1] + mov[1]
 
             if esPosicionValida(nuevaX, nuevaY, tablero):
-                puntosLlegada.append((nuevaX, nuevaY))
+                nuevoPunto = (nuevaX, nuevaY)
+
+                if nuevoPunto not in puntosLlegada:             # Optimizacion para no considerar el mismo punto mas de una vez
+                    puntosLlegada.append((nuevaX, nuevaY))
 
     return puntosLlegada
 
@@ -114,8 +117,8 @@ def generarCaso():
         print("Error, el tablero debe tener un tamaño mínimo de 4 celdas por lado")
         return                          # La ejecucion del caso termina si se ingresan datas erroneos
 
-    if tamanoTablero > 100:
-        print("Error, el tablero debe tener un tamaño máximp de 100 celdas por lado")
+    if tamanoTablero > 1000:
+        print("Error, el tablero debe tener un tamaño máximo de 1000 celdas por lado")
         return                          # Termina ejecucion
     
     if cantidadCeldas < 1 or cantidadCeldas > 16:
