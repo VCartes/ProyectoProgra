@@ -1,3 +1,11 @@
+
+# Integrantes:
+# - Vicente René Cartes Cortés
+# - Alexis Andrés Sotomayor Saldivia
+# - Cristofer Luis Mamani Marino
+# - Guido Esteban Aravena Retamal
+
+
 def esPosicionValida(x, y, tablero):
     if x > tablero or x < 1 or y > tablero or y < 1:
         return False
@@ -6,11 +14,9 @@ def esPosicionValida(x, y, tablero):
 
 def posiblesMovimientos(puntosPartida, tablero):
 
-    """
-    Funcion que toma una lista de puntos de partida y entrega una lista
-    de todos los puntos a los cuales se puede llegar con un movimiento desde
-    cada uno de los puntos de partida
-    """
+    # Funcion que toma una lista de puntos de partida y entrega una lista
+    # de todos los puntos a los cuales se puede llegar con un movimiento desde
+    # cada uno de los puntos de partida
 
     movimientos = [(-1, 2), (1, 2), (2, 1), (2, -1), (1, -2), (-1, -2), (-2, -1), (-2, 1)]
     puntosLlegada = list()
@@ -58,10 +64,8 @@ def crearMatDistancias(puntos, tablero):
 
 def generarCombinaciones(conjunto: list) -> list:
 
-    """
-    Funcion recursiva que dado un conjunto de puntos genera
-    todas sus posibles combinaciones (permutaciones?)
-    """
+    # Funcion recursiva que dado un conjunto de puntos genera
+    # todas sus posibles combinaciones (permutaciones?)
 
     combs = list()
 
@@ -148,6 +152,9 @@ def generarCaso():
     print(f"{movimientos} movimientos")
 
 
+
+# PARTE PRINCIPAL DEL PROGRAMA
+# Aca inicia la ejecucion del porgrama
 
 # Pedir Cantidad de Casos y Validar
 cantidadCasos = int(input("Cantidad de casos: "))
